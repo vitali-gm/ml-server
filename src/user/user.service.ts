@@ -1,21 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import {NewUser, User} from "./interfaces/user";
-import * as userModel from './progress/db/user'
+import {User} from "./interfaces/user";
+import * as userModel from '../progress/db/user'
 
 @Injectable()
 export class UserService {
 
-    private users: User[] = userModel.get()
-
     findAll(): User[] {
-        return  this.users
+        return  userModel.get()
     }
 
-    create(user: NewUser): User {
+    findOne(id: number): User {
+        return userModel.findById(id)
+    }
+
+    create(user: User): User {
         return userModel.save(user)
     }
 
-    update(id: number, data: object): User {
-        return userModel.update(id, data)
+    update(id: number, user: User): User {
+        return userModel.update(id, user)
     }
 }

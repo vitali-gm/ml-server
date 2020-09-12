@@ -1,8 +1,3 @@
-export interface NewUser {
-    name: string
-    lastName: string
-}
-
 export interface User {
     _id: number,
     name: string

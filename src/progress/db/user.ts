@@ -1,21 +1,22 @@
 import * as fs from 'fs';
+import {User} from "../../user/interfaces/user";
 
 const path = 'db/users.json'
 
-export const get = () => {
+export const get = (): User[] => {
     const res = fs.readFileSync(path, 'utf8')
     return JSON.parse(res)
 }
 
-export const findById = (id) => {
+export const findById = (id: number): User => {
     const users = this.get()
-    const index = users.findIndex(user => user._id === id)
+    const index = users.findIndex(user => user._id == id)
     if (index !== -1) {
         return users[index]
     }
 }
 
-export const save = (user) => {
+export const save = (user: User): User => {
     const users = this.get()
     user._id = Date.now()
     user.records = []
@@ -28,17 +29,13 @@ export const save = (user) => {
     return user
 }
 
-export const update = (id, data) => {
+export const update = (id: number, user: User): User => {
     const users = this.get()
-
-    const index = users.findIndex(user => user._id === id);
-    if (data.name) users[index].name = data.name;
-    if (data.records) users[index].records = data.records;
-    if (data.greasiness) users[index].greasiness = data.greasiness;
-    if (data.countCows) users[index].countCows = data.countCows;
+    const index = users.findIndex(user => user._id == id);
+    users[index] = user
 
     fs.writeFile(path, JSON.stringify(users),  'utf8', (err) => {
         if (err) throw err;
     });
-    return data[index]
+    return user
 }
