@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Put, Param, Body } from '@nestjs/common';
-import {User} from "./interfaces/user";
+import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import {UserService} from "./user.service";
+import {User} from "./entities/user.entity";
+import {UpdateResult} from "typeorm";
 
 @Controller('user')
 export class UserController {
@@ -21,8 +22,8 @@ export class UserController {
         return this.userService.create(user)
     }
 
-    @Put()
-    async update(@Param('id') id: string ,@Body('user') user: User): Promise<User> {
+    @Put(':id')
+    async update(@Param('id') id: string, @Body('user') user: User): Promise<UpdateResult> {
         return this.userService.update(parseInt(id), user)
     }
 

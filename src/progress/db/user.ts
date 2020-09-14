@@ -10,18 +10,12 @@ export const get = (): User[] => {
 
 export const findById = (id: number): User => {
     const users = this.get()
-    const index = users.findIndex(user => user._id == id)
-    if (index !== -1) {
-        return users[index]
-    }
+    return users.find(item => item._id == id)
 }
 
 export const save = (user: User): User => {
     const users = this.get()
     user._id = Date.now()
-    user.records = []
-    user.greasiness = []
-    user.countCows = []
     users.push(user)
     fs.writeFile(path, JSON.stringify(users),  'utf8', (err) => {
         if (err) throw err;

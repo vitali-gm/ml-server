@@ -3,6 +3,8 @@
 /node_modules
 /db
 
+ormconfig.json
+
 # Logs
 logs
 *.log

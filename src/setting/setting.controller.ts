@@ -4,21 +4,21 @@ import {Setting} from "./interfaces/setting";
 
 @Controller('setting')
 export class SettingController {
-    constructor(private readonly userService: SettingService) {}
+    constructor(private readonly settingService: SettingService) {}
 
     @Get()
     async findAll(): Promise<Setting[]> {
-        return this.userService.findAll()
+        return this.settingService.findAll()
     }
 
     @Post()
     async create(@Body('user') user: Setting): Promise<Setting> {
-        return this.userService.create(user)
+        return this.settingService.create(user)
     }
 
     @Put()
     async update(@Param('date') date: string ,@Body('setting') setting: Setting): Promise<Setting> {
-        return this.userService.update(date, setting)
+        return this.settingService.update(date, setting)
     }
 
 }
