@@ -1,19 +1,28 @@
 import { Injectable } from '@nestjs/common';
-import * as settingModel from '../progress/db/setting'
-import {Setting} from "./interfaces/setting";
+import {InjectRepository} from "@nestjs/typeorm";
+import {Setting} from "./entities/setting.entity";
+import {Repository} from "typeorm";
 
 @Injectable()
 export class SettingService {
 
-    findAll(): Setting[] {
-        return  settingModel.get()
+    constructor(
+        @InjectRepository(Setting)
+        private settingRepository: Repository<Setting>,
+    ) {}
+
+    async findAll(): Promise<Setting[]> {
+        return  this.settingRepository.find()
+    }
+    async findOne(id: number): Promise<Setting> {
+        return this.settingRepository.findOne(id)
     }
 
-    create(setting: Setting): Setting {
-        return settingModel.save(setting)
+    async create(setting: Setting): Promise<Setting> {
+        return this.settingRepository.save(setting)
     }
 
-    update(date: string, setting: Setting): Setting {
-        return settingModel.update(date, setting)
+    async update(id: number, setting: Setting): Promise<any> {
+        await this.settingRepository.save({ ...setting, id: Number(id) })
     }
 }

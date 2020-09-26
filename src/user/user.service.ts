@@ -30,8 +30,8 @@ export class UserService {
         })
     }
 
-    async update(id: number, user: User): Promise<User> {
-        return this.usersRepository.save({ ...user, id: Number(id) })
+    async update(id: number, user: User): Promise<any> {
+        await this.usersRepository.save({ ...user, id: Number(id) })
     }
 
     async delete(id: number): Promise<any> {

@@ -23,7 +23,8 @@ export class UserController {
 
     @Put(':id')
     async update(@Param('id') id: number, @Body() user: User): Promise<User> {
-        return this.userService.update(id, user)
+        await this.userService.update(id, user)
+        return this.userService.findOne(id)
     }
 
     @Delete(':id')
