@@ -23,13 +23,18 @@ export class UserController {
 
     @Put(':id')
     async update(@Param('id') id: number, @Body() user: User): Promise<User> {
-        await this.userService.update(id, user)
-        return this.userService.findOne(id)
+        return this.userService.update(id, user)
+        // return this.userService.findOne(id)
     }
 
     @Delete(':id')
     async delete(@Param('id') id: number): Promise<any> {
         return this.userService.delete(id)
+    }
+
+    @Post("update-all")
+    async updateAll(@Body() users: User[]): Promise<User[]> {
+        return this.userService.updateAll(users)
     }
 
 }

@@ -22,7 +22,8 @@ export class SettingService {
         return this.settingRepository.save(setting)
     }
 
-    async update(id: number, setting: Setting): Promise<any> {
+    async update(id: number, setting: Setting): Promise<Setting> {
         await this.settingRepository.save({ ...setting, id: Number(id) })
+        return this.settingRepository.findOne(id)
     }
 }

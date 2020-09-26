@@ -11,27 +11,27 @@ export class User {
     @Column()
     name: string;
 
-    @Column()
+    @Column({default: 0})
     order: number;
 
     @OneToMany(
         () => Record,
         (record: Record) => record.user,
-        // {cascade: true, onDelete: 'CASCADE'}
+        {cascade: true, onDelete: 'CASCADE'}
         )
     records: Record[]
 
     @OneToMany(
         () => Greasiness,
         (greasiness:Greasiness) => greasiness.user,
-        // {cascade: true, onDelete: 'CASCADE'}
+        {cascade: true, onDelete: 'CASCADE'}
         )
     greasiness: Greasiness[]
 
     @OneToMany(
       () => Cows,
       (cow:Cows) => cow.user,
-      // {cascade: true, onDelete: 'CASCADE'}
+      {cascade: true, onDelete: 'CASCADE'}
       )
     countCows: Cows[]
 }

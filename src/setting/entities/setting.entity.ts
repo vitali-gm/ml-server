@@ -5,9 +5,15 @@ export class Setting {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    price: string
+    @Column('json')
+    price: Price
 
     @Column()
     date: string
+}
+
+interface Price {
+    firstPeriod: number,
+    lastPeriod: number,
+    mastit: number,
 }

@@ -12,12 +12,12 @@ export class SettingController {
     }
 
     @Post()
-    async create(@Body('user') user: Setting): Promise<Setting> {
-        return this.settingService.create(user)
+    async create(@Body() setting: Setting): Promise<Setting> {
+        return this.settingService.create(setting)
     }
 
     @Put(':id')
-    async update(@Param('id') id: number ,@Body('setting') setting: Setting): Promise<Setting> {
+    async update(@Param('id') id: number ,@Body() setting: Setting): Promise<Setting> {
         await this.settingService.update(id, setting)
         return this.settingService.findOne(id)
     }

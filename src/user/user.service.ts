@@ -14,7 +14,10 @@ export class UserService {
 
     async findAll(): Promise<User[]> {
         return this.usersRepository.find({
-            relations: ['records', 'greasiness', 'countCows']
+            relations: ['records', 'greasiness', 'countCows'],
+            order: {
+                order: "ASC"
+            }
         })
     }
 
@@ -25,13 +28,15 @@ export class UserService {
     }
 
     async create(user: User): Promise<User> {
-        return this.usersRepository.save(user, {
-
-        })
+        return this.usersRepository.save(user)
     }
 
-    async update(id: number, user: User): Promise<any> {
-        await this.usersRepository.save({ ...user, id: Number(id) })
+    async update(id: number, user: User): Promise<User> {
+        return  this.usersRepository.save({ ...user, id: Number(id) })
+    }
+
+    async updateAll(users: User[]): Promise<User[]> {
+        return this.usersRepository.save(users)
     }
 
     async delete(id: number): Promise<any> {
