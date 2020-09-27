@@ -13,8 +13,6 @@ export class ExportController {
     @Get()
     async export(): Promise<any> {
         const exportData = await (new Export()).handle()
-        console.log(exportData)
-
         await this.userService.create(exportData.users)
         await this.settingService.create(exportData.settings)
     }
