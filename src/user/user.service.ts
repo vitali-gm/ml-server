@@ -36,7 +36,13 @@ export class UserService {
     }
 
     async updateAll(users: User[]): Promise<User[]> {
-        return this.usersRepository.save(users)
+        await this.usersRepository.save(users)
+        return this.usersRepository.find({
+            relations: ['records', 'greasiness', 'countCows'],
+            order: {
+                order: "ASC"
+            }
+        })
     }
 
     async delete(id: number): Promise<any> {

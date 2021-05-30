@@ -11,6 +11,9 @@ export class User {
     @Column()
     name: string;
 
+    @Column({default: 1})
+    type: number;
+
     @Column({default: 0})
     order: number;
 
