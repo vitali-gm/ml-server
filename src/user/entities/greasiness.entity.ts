@@ -7,7 +7,7 @@ export class Greasiness {
     id: number;
 
     @Column()
-    value: number;
+    value: string;
 
     @Column()
     date: string;
