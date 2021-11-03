@@ -12,6 +12,10 @@ export class Greasiness {
     @Column()
     date: string;
 
-    @ManyToOne(() => User, (user: User) => user.greasiness)
+    @ManyToOne(
+      () => User,
+      (user: User) => user.greasiness,
+      {onDelete: 'CASCADE'}
+      )
     public user: User;
 }

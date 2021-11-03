@@ -12,6 +12,10 @@ export class Cows {
     @Column()
     date: string;
 
-    @ManyToOne(() => User, (user: User) => user.countCows)
+    @ManyToOne(
+      () => User,
+      (user: User) => user.countCows,
+      {onDelete: "CASCADE"}
+    )
     public user: User;
 }
